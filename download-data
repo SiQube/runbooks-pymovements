@@ -1,0 +1,17 @@
+#!/usr/bin/env python3
+import argparse
+import pymovements as pm
+import subprocess
+
+def main() -> int:
+    subprocess.call(('pip', 'install', '-e', '.'))
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--dataset', default='PoTeC')
+    args = parser.parse_args()
+    dataset = pm.Dataset(args.dataset, path=f'data/{args.dataset}')
+    dataset.download(verbose=True)
+    dataset.load()
+    return 0
+
+if __name__ == '__main__':
+    raise SystemExit(main())
