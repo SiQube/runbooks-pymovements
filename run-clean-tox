@@ -1,0 +1,30 @@
+#!/usr/bin/env python3
+import shlex
+import shutil
+import subprocess
+
+def _p_cmd(cmd: tuple[str, ...]) -> None:
+    print(f'++ running {shlex.join(cmd)}')
+
+def _cmd_sp(*cmd: str) -> None:
+    _p_cmd(cmd)
+    subprocess.call(cmd)
+
+def _cmd_shutil_rmtree(*cmd: str) -> None:
+    _p_cmd(cmd)
+    shutil.rmtree(*cmd, ignore_errors=True)
+
+
+
+def main() -> int:
+    _cmd_shutil_rmtree('coverage*')
+    _cmd_shutil_rmtree('.coverage*')
+    _cmd_shutil_rmtree('.tox')
+    _cmd_shutil_rmtree('toy_dataset')
+    _cmd_shutil_rmtree('tests/preprocessed')
+    _cmd_sp('tox', '-e', 'py312')
+
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())
