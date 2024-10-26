@@ -2,11 +2,11 @@
 import subprocess
 import sys
 
-import pymovements as pm
 
 def main() -> int:
     subprocess.call(('pip', 'install', '-e', '.'))
     dataset_name = sys.argv[1]
+    import pymovements as pm
     dataset = pm.Dataset(dataset_name, path=f'data/{dataset_name}')
     dataset.download(verbose=True)
     dataset.load()
