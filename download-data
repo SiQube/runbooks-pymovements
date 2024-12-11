@@ -5,6 +5,7 @@ import sys
 
 def main() -> int:
     subprocess.call(('pip', 'install', '-e', '.'))
+    import pymovements as pm
     dataset_name = sys.argv[1]
     import pymovements as pm
     dataset = pm.Dataset(dataset_name, path=f'data/{dataset_name}')
